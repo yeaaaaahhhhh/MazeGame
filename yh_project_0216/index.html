@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>0216 project</title>
+    <link href="./style.css" rel="stylesheet">
+</head>
+
+<body>
+    <canvas id="canv"></canvas>
+    <script src="scripts.js"></script>
+    <script src="RectangleGameObject.js"></script>
+
+    <script type="module">
+        "use strict"
+        import time from './engine/time.js'
+        import Circle from './Circle.js'
+        document.addEventListener("keypress", keyPressed)
+        let px = 225;
+        let py = 115;
+        let endy = 500
+        let endl = 450
+        let endr = 500
+        let endOfGame = false;
+        let timeCounter = setInterval(draw, time.millisecondsBetweenFrames)
+
+
+        function keyPressed(e) {
+            if(endOfGame==true)
+                return
+            let pxNew = px;
+            let pyNew = py;
+            if (e.which == 97)//a
+            {
+                pxNew = px - 5
+                draw()
+            }
+            else if (e.which == 115)//s
+            {
+                pyNew = py + 5
+                draw()
+            }
+            else if (e.which == 100)//d
+            {
+                pxNew = px + 5
+                draw()
+            }
+            else if (e.which == 119)//w
+            {
+                pyNew = py - 5
+                draw()
+            }
+            let collisionCheck = false;
+            for (let rect of walls) {
+                if (rect.x < pxNew + 15 && rect.x + rect.w > pxNew - 15 && rect.y < pyNew + 15 && rect.y + rect.h > pyNew + 15) {
+                    console.log("in")
+                    collisionCheck = true;
+                    break;
+                }
+            }
+            if (collisionCheck == false) {
+                px = pxNew
+                py = pyNew
+            }
+            let idxfound = darkRect.findIndex(function (element) {
+                //console.log(element.x,element.y)
+                if (element.x < px + 15 && element.x + 50 > px - 15 && element.y < py + 15 && element.y + 50 > py - 15) {
+                    //console.log("a")
+                    return true
+                }
+                return false
+            })
+
+            //console.log(idxfound)
+
+            if (idxfound > -1) {
+                //console.log(idxfound)
+                darkRect.splice(idxfound, 1)
+            }
+
+            if (endy < py && (px > endl && px < endr)) {
+                endOfGame = true
+                clearInterval(timeCounter)
+                drawEnd()
+            }
+
+        }
+
+
+        let { canvas, ctx } = getCanvas();
+
+        let player=new Circle(px,py)
+        function draw() {
+            if (endOfGame == false) {
+                ctx.fillStyle = "black"
+                ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height)
+                ctx.fillStyle = "white"
+                ctx.font = "30px Arial"
+                ctx.fillText("Time : " + Math.round((time.timePassed * 100) / 100), 30, 30)
+                drawWall()
+                player.draw(ctx)
+                for (let rect of darkRect) {
+                    rect.draw(ctx)
+                }
+                time.timePassed += time.secondsBetweenFrame
+            }
+        }
+
+        function drawEnd() {
+            //ctx.clearRect(0,0,1000,1000)
+            ctx.fillStyle = "black"
+            ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height)
+            ctx.fillStyle = "white"
+            ctx.font = "50px Arial"
+            ctx.fillText("Congratulation! Your time record is " + Math.round((time.timePassed * 100) / 100), 200, 200);
+        }
+
+        let walls = []
+        function drawWall() {
+            walls.push(new RectangleGameObject(100, 100, 50, 400, "yellow"))
+            walls.push(new RectangleGameObject(100, 100, 100, 50, "white"))
+            walls.push(new RectangleGameObject(250, 100, 350, 50, "blue"))
+            walls.push(new RectangleGameObject(600, 100, 50, 450, "white"))
+            walls.push(new RectangleGameObject(100, 500, 350, 50, "white"))
+            walls.push(new RectangleGameObject(500, 500, 100, 50, "white"))
+
+            for (let rect of walls) {
+                rect.draw(ctx)
+            }
+        }
+
+        let darkRect = []
+        drawDarkness()
+
+        function drawDarkness() {
+            for (let x = 150; x < 600; x = x + 50) {
+                for (let y = 150; y < 500; y = y + 50) {
+                    darkRect.push(new RectangleGameObject(x, y, 50, 50, "grey"))
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
