@@ -9,12 +9,16 @@
 <body>
     <canvas id="canv"></canvas>
     <script src="scripts.js"></script>
-    <script src="RectangleGameObject.js"></script>
+    
 
     <script type="module">
         "use strict"
+
         import time from './engine/time.js'
-        import Circle from './Circle.js'
+        import Circle from './engine/Circle.js'
+        import PlayerGameObject from './Game/PlayerGameObject.js'
+        import RectangleGameObject from './Game/RectangleGameObject.js'
+
         document.addEventListener("keypress", keyPressed)
         let px = 225;
         let py = 115;
@@ -24,6 +28,7 @@
         let endOfGame = false;
         let timeCounter = setInterval(draw, time.millisecondsBetweenFrames)
 
+        let gameObjects=[]
 
         function keyPressed(e) {
             if(endOfGame==true)
@@ -88,8 +93,8 @@
 
 
         let { canvas, ctx } = getCanvas();
-
-        let player=new Circle(px,py)
+        let player= new PlayerGameObject(px,py,15)
+        
         function draw() {
             if (endOfGame == false) {
                 ctx.fillStyle = "black"
