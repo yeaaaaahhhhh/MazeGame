@@ -4,8 +4,8 @@ class Input {
   static fraemKey;
 
   static update() {
-    // this.frameKey=this.key;
-    // this.key=0;
+    this.frameKey=this.key;
+    this.key=0;
   }
   static getKeyPressed() {
     return Input.key;
@@ -13,9 +13,9 @@ class Input {
   static attach(document) {
     document.body.addEventListener("keypress", keyPressed)
     function keyPressed(event) {
-      console.log("attach" + event.key);
+      //console.log("attach" + event.key);
       Input.key = event.key
-      console.log("key check",Input.key)
+      //console.log("key check",Input.key)
     }
   }
 }

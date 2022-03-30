@@ -5,29 +5,31 @@ class PlayerUpdateComponent extends Component {
         super(parent)
     }
     update() {
-        let circle = this.parent.getComponent("Circle")
-        let px = circle.px
-        let py = circle.py
+
+        let circle = this.parent.getComponent('Circle')
+        let px = circle.x
+        let py = circle.y
         let pxNew = px;
         let pyNew = py;
-        console.log(Input.key + "****")
-        if (Input.key != undefined) {
+        //console.log(px+ "////"+py)
+        //console.log(Input.frameKey + "****")
+        if (Input.frameKey != undefined) {
             //console.log("not undefined",Input.key)
-            switch (Input.key) {
-                case a:
+            switch (Input.frameKey) {
+                case "a":
                     pxNew = px - 5
                     circle.x = pxNew
                     break;
-                case s:
+                case "s":
                     console.log("down")
                     pyNew = py + 5
                     circle.y = pyNew
                     break;
-                case d:
+                case "d":
                     pxNew = px + 5
                     circle.x = pxNew
                     break
-                case w:
+                case "w":
                     pyNew = py - 5
                     circle.y = pyNew
                     break;

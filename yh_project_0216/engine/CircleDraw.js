@@ -15,7 +15,7 @@ class CircleDraw extends Component
         ctx.strokeStyle=this.strokeStyle
 
         let circle=this.parent.getComponent('Circle')
-
+        console.log(circle.x+" == "+circle.y)
         ctx.beginPath()
         ctx.arc(circle.x,circle.y, circle.r, 0, Math.PI * 2)
         ctx.fill()

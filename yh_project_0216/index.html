@@ -13,7 +13,7 @@
 
     <script type="module">
         "use strict"
-        import Input from './engine/input.js'
+        import Input from './engine/Input.js'
         import time from './engine/time.js'
         import Circle from './engine/Circle.js'
         import PlayerGameObject from './Game/PlayerGameObject.js'
@@ -101,7 +101,7 @@
         function draw() {
             //console.log("draw")
             if (endOfGame == false) {
-                Input.update()
+    
                 ctx.fillStyle = "black"
                 ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height)
                 ctx.fillStyle = "white"
@@ -113,6 +113,7 @@
                 for (let rect of darkRect) {
                     rect.draw(ctx)
                 }
+                Input.update()
                 time.timePassed += time.secondsBetweenFrame
             }
         }
@@ -129,12 +130,57 @@
     
         function drawWall() {
             walls.push(new RectangleGameObject(100, 100, 10, 400, "yellow"))
-            walls.push(new RectangleGameObject(200, 100, 10, 50, "blue"))
             walls.push(new RectangleGameObject(100, 100, 100, 10, "white"))
             walls.push(new RectangleGameObject(250, 100, 350, 10, "blue"))
-            walls.push(new RectangleGameObject(600, 100, 10, 450, "white"))
-            walls.push(new RectangleGameObject(100, 500, 350, 50, "white"))
-            walls.push(new RectangleGameObject(500, 500, 100, 50, "white"))
+            walls.push(new RectangleGameObject(600, 100, 10, 410, "white"))
+            walls.push(new RectangleGameObject(100, 500, 350, 10, "white"))
+            walls.push(new RectangleGameObject(500, 500, 100, 10, "white"))
+            
+            //maze map
+            walls.push(new RectangleGameObject(195, 100, 10, 60, "white"))
+            walls.push(new RectangleGameObject(245, 100, 10, 100, "white"))
+            walls.push(new RectangleGameObject(245, 195, 50, 10, "white"))
+            walls.push(new RectangleGameObject(300, 150, 50, 10, "white"))
+            walls.push(new RectangleGameObject(350, 150, 10, 100, "white"))
+            walls.push(new RectangleGameObject(150, 250, 210, 10, "white"))
+            walls.push(new RectangleGameObject(150, 250, 210, 10, "white"))
+            walls.push(new RectangleGameObject(150, 250, 10, 50, "white"))
+            walls.push(new RectangleGameObject(150, 300, 50, 10, "white"))
+            walls.push(new RectangleGameObject(150, 350, 100, 10, "white"))
+            walls.push(new RectangleGameObject(250, 250, 10, 150, "white"))
+            walls.push(new RectangleGameObject(250, 400, 50, 10, "white"))
+            walls.push(new RectangleGameObject(100, 400, 100, 10, "white"))
+            walls.push(new RectangleGameObject(150, 450, 150, 10, "white"))
+            walls.push(new RectangleGameObject(300, 450, 10, 50, "white"))
+            walls.push(new RectangleGameObject(350, 400, 10, 50, "white"))
+            walls.push(new RectangleGameObject(350, 450, 50, 10, "white"))
+            walls.push(new RectangleGameObject(400, 400, 10, 50, "white"))
+            walls.push(new RectangleGameObject(400, 400, 150, 10, "white"))
+            walls.push(new RectangleGameObject(500, 400, 10, 50, "white"))
+            walls.push(new RectangleGameObject(450, 450, 10, 50, "white"))
+            walls.push(new RectangleGameObject(450, 450, 50, 10, "white"))
+            walls.push(new RectangleGameObject(400, 150, 10, 200, "white"))
+            walls.push(new RectangleGameObject(300, 300, 200, 10, "white"))
+            walls.push(new RectangleGameObject(300, 300, 10, 50, "white"))
+            walls.push(new RectangleGameObject(300, 350, 50, 10, "white"))
+            walls.push(new RectangleGameObject(400, 150, 50, 10, "white"))
+            walls.push(new RectangleGameObject(450, 150, 10, 100, "white"))
+            walls.push(new RectangleGameObject(500, 100, 10, 100, "white"))
+            walls.push(new RectangleGameObject(550, 150, 10, 50, "green"))
+            walls.push(new RectangleGameObject(550, 150, 50, 10, "green"))
+            walls.push(new RectangleGameObject(500, 250, 100, 10, "white"))
+            walls.push(new RectangleGameObject(400, 350, 50, 10, "white"))
+            walls.push(new RectangleGameObject(450, 350, 10, 50, "white"))
+            walls.push(new RectangleGameObject(500, 300, 10, 50, "white"))
+            walls.push(new RectangleGameObject(550, 300, 10, 100, "white"))
+            walls.push(new RectangleGameObject(550, 450, 10, 50, "white"))
+
+            
+        
+
+
+            walls.push(new RectangleGameObject(150, 140, 10, 60, "white"))
+            walls.push(new RectangleGameObject(100, 195, 105, 10, "white"))
             
 
             for (let rect of walls) {
@@ -143,11 +189,11 @@
         }
 
         let darkRect = []
-        drawDarkness()
+        //drawDarkness()
 
         function drawDarkness() {
-            for (let x = 150; x < 600; x = x + 50) {
-                for (let y = 150; y < 500; y = y + 50) {
+            for (let x = 105; x < 600; x = x + 50) {
+                for (let y = 105; y < 500; y = y + 50) {
                     darkRect.push(new RectangleGameObject(x, y, 50, 50, "grey"))
                 }
             }
