@@ -2,6 +2,7 @@ class GameObject{
     constructor()
     {
         this.components=[]
+        this.markForDelete=false;
     }
     draw(ctx)
     {

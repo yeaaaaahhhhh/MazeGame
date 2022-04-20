@@ -19,20 +19,44 @@
         import Constants from './Game/Constants.js'
         import PlayerGameObject from './Game/PlayerGameObject.js'
         import RectangleGameObject from './Game/RectangleGameObject.js'
+        import StartScene from "./Game/StartScene.js"
+        import Game from "./engine/Game.js"
+        import EndScene from "./Game/EndScene.js"
 
         Input.attach(document);
-        //document.addEventListener("keypress", keyPressed)
 
         let px = 225;
         let py = 115;
 
-        let timeCounter = setInterval(draw, time.millisecondsBetweenFrames)
-
-        let gameObjects = []
-
+        
+        
         let { canvas, ctx } = getCanvas();
         let player = new PlayerGameObject(px, py, 15)
+        
+        //let scene=new MainScene()
+        let startScene=new StartScene()
+        let endScene=new EndScene()
+        Game.scenes.push(startScene);
+        Game.scenes.push(endScene);
+        //Game.scenes.push(scene);
+        Game.changeScene(0)
+        
+        
+        //let gameObjects = []
+        //let timeCounter = setInterval(draw, time.millisecondsBetweenFrames)
+        //pushWall()
+        //pushDarkness()
+        function tick()
+        {
+            Game.updateScene()
+            Input.update()
+            Game.scene().update(ctx)
+            Game.scene().draw(ctx)
+            Game.scene().remove()
+            time.timePassed+=time.secondsBetweenFrame
+        }
 
+        setInterval(tick,time.millisecondsBetweenFrames)
         function draw() {
             //console.log("draw")
             if (Constants.endOfGame == false) {
@@ -41,7 +65,7 @@
                 ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height)
                 ctx.fillStyle = "white"
                 ctx.font = "30px Arial"
-                ctx.fillText("Time : " + Math.round((time.timePassed * 100) / 100), 30, 30)
+                ctx.fillText("Time : " + Math.round(time.timePassed * 100) / 100, 30, 30)
                 for (let rect of Constants.walls) {
                     rect.draw(ctx)
                 }
@@ -67,9 +91,6 @@
             ctx.font = "50px Arial"
             ctx.fillText("Congratulation! Your time record is " + Math.round((time.timePassed * 100) / 100), 200, 200);
         }
-
-        pushWall()
-        pushDarkness()
         
         function pushWall() {
             Constants.walls.push(new RectangleGameObject(100, 100, 10, 400, "yellow"))
