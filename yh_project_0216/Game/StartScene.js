@@ -1,5 +1,5 @@
 import Scene from "../engine/Scene.js"
-import StartGameObject from "./StartGameOjbect.js"
+import StartGameObject from "./StartGameObject.js"
 
 class StartScene extends Scene
 {
