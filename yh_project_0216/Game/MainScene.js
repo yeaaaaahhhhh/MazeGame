@@ -3,6 +3,7 @@ import MainGameObject from "./MainGameObject.js";
 import WallGameObject from "./WallGameObject.js"
 import PlayerGameObject from "./PlayerGameObject.js";
 import ShadowGameObject from "./ShadowGameObject.js";
+import ItemGameObject from "./ItemGameObject.js";
 
 class MainScene extends Scene{
     constructor()
@@ -13,9 +14,9 @@ class MainScene extends Scene{
     {
         this.gameObjects.push(new MainGameObject())
 
-        this.gameObjects.push(new WallGameObject(100, 100, 10, 400, "yellow"))
+        this.gameObjects.push(new WallGameObject(100, 100, 10, 400, "white"))
         this.gameObjects.push(new WallGameObject(100, 100, 100, 10, "white"))
-        this.gameObjects.push(new WallGameObject(250, 100, 350, 10, "blue"))
+        this.gameObjects.push(new WallGameObject(250, 100, 350, 10, "white"))
         this.gameObjects.push(new WallGameObject(600, 100, 10, 410, "white"))
         this.gameObjects.push(new WallGameObject(100, 500, 350, 10, "white"))
         this.gameObjects.push(new WallGameObject(500, 500, 100, 10, "white"))
@@ -48,8 +49,8 @@ class MainScene extends Scene{
         this.gameObjects.push(new WallGameObject(400, 150, 50, 10, "white"))
         this.gameObjects.push(new WallGameObject(450, 150, 10, 100, "white"))
         this.gameObjects.push(new WallGameObject(500, 100, 10, 100, "white"))
-        this.gameObjects.push(new WallGameObject(550, 150, 10, 50, "green"))
-        this.gameObjects.push(new WallGameObject(550, 150, 50, 10, "green"))
+        this.gameObjects.push(new WallGameObject(550, 150, 10, 50, "white"))
+        this.gameObjects.push(new WallGameObject(550, 150, 50, 10, "white"))
         this.gameObjects.push(new WallGameObject(500, 250, 100, 10, "white"))
         this.gameObjects.push(new WallGameObject(400, 350, 50, 10, "white"))
         this.gameObjects.push(new WallGameObject(450, 350, 10, 50, "white"))
@@ -60,6 +61,8 @@ class MainScene extends Scene{
     
         this.gameObjects.push(new WallGameObject(150, 140, 10, 60, "white"))
         this.gameObjects.push(new WallGameObject(100, 195, 105, 10, "white"))
+
+        this.gameObjects.push(new ItemGameObject(270,150,"orange"))
 
         this.gameObjects.push(new PlayerGameObject(225, 115, 15))
        
@@ -73,31 +76,3 @@ class MainScene extends Scene{
 }
 
 export default MainScene
-
-
-
-/*function draw() {
-            //console.log("draw")
-            if (Constants.endOfGame == false) {
-
-                ctx.fillStyle = "black"
-                ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height)
-                ctx.fillStyle = "white"
-                ctx.font = "30px Arial"
-                ctx.fillText("Time : " + Math.round(time.timePassed * 100) / 100, 30, 30)
-                for (let rect of Constants.walls) {
-                    rect.draw(ctx)
-                }
-                player.update()
-                player.draw(ctx)
-                for (let rect of Constants.darkRect) {
-                    rect.draw(ctx)
-                }
-                Input.update()
-                time.timePassed += time.secondsBetweenFrame
-            }
-            else {
-                clearInterval(timeCounter)
-                drawEnd()
-            }
-        } */
