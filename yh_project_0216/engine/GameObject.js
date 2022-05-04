@@ -3,10 +3,12 @@ class GameObject{
     {
         this.components=[]
         this.markForDelete=false;
+        this.visibility=true;
     }
     draw(ctx)
     {
-        this.components.filter(c=>c.draw).forEach(c=>c.draw(ctx));
+        if(this.visibility)
+            this.components.filter(c=>c.draw).forEach(c=>c.draw(ctx));
     }
     update()
     {

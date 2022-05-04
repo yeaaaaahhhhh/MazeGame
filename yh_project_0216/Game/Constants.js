@@ -5,5 +5,6 @@ class Constants{
     static endy = 500
     static endl = 450
     static endr = 500
+    static aTime=0
 }
 export default Constants

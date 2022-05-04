@@ -62,7 +62,7 @@ class MainScene extends Scene{
         this.gameObjects.push(new WallGameObject(150, 140, 10, 60, "white"))
         this.gameObjects.push(new WallGameObject(100, 195, 105, 10, "white"))
 
-        this.gameObjects.push(new ItemGameObject(270,150,"orange"))
+        this.gameObjects.push(new ItemGameObject(180,280,"orange"))
 
         this.gameObjects.push(new PlayerGameObject(225, 115, 15))
        

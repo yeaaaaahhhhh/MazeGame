@@ -9,7 +9,7 @@ class StartScene extends Scene
     }
     start()
     {
-        this.gameObjects.push(new StartGameObject(50,50));
+        this.gameObjects.push(new StartGameObject(100,100));
     }
 }
 

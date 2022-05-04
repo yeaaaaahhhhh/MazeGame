@@ -13,7 +13,7 @@ class StartGameObject extends GameObject{
     }
     start()
     {
-        this.components.push(new Text(this,this.x,this.y,"Welcome\nMAZE GAME","50px sans"))
+        this.components.push(new Text(this,this.x,this.y,"Welcome to the MAZE GAME","50px sans"))
         this.components.push(new TextDraw(this,"white","black"))
         this.components.push(new StartUpdateComponent(this))
     }

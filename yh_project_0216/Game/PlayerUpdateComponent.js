@@ -54,17 +54,26 @@ class PlayerUpdateComponent extends Component {
                 circle.x = pxNew
                 circle.y = pyNew
             }
-            //console.log(itemObject)
             if (itemObject != null) {
                 let item = itemObject.getComponent("Rectangle")
                 if (item.x < circle.x + 10 && item.x + 10 > circle.x - 10 && item.y < circle.y + 10 && item.y + 10 > circle.y - 10) {
                     console.log("b")
                     itemObject.markForDelete = true;
-                    let aTime=time.timePassed
-                    let tempObjects = structuredClone(shadowObjects);
+                    Constants.aTime+=time.timePassed
+                    // let tempObjects = structuredClone(shadowObjects);
                     shadowObjects.forEach(element => {
-                        element.markForDelete=true
+                        //element.markForDelete=true
+                        element.visibility=false
                     });
+                }
+            }
+            else
+            {
+                if(Constants.aTime!=0&&Constants.aTime+3<time.timePassed)
+                {
+                    shadowObjects.forEach(element=>{
+                        element.visibility=true;
+                    })
                 }
             }
 

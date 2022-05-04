@@ -1,5 +1,6 @@
 import Scene from "../engine/Scene.js";
-import EndGameObject from "./EndGameObject.js";
+import TextGameObject from "./TextGameObject.js";
+import time from "../engine/time.js"
 
 class EndScene extends Scene
 {
@@ -9,7 +10,8 @@ class EndScene extends Scene
     }
     start()
     {
-        this.gameObjects.push(new EndGameObject(50,50));
+        this.gameObjects.push(new TextGameObject(100,100,"Escape Success!"));
+        this.gameObjects.push(new TextGameObject(100,200,"Your Time Record is "+(Math.round(time.timePassed)-2)));
     }
 }
 

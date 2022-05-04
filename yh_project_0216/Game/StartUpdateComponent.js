@@ -1,4 +1,4 @@
-import Time from "../engine/time.js"
+import time from "../engine/time.js"
 import Component from "../engine/Component.js";
 import Game from "../engine/Game.js";
 
@@ -10,8 +10,8 @@ class StartUpdateComponent extends Component{
     }
     update()
     {
-        this.time+=Time.secondsBetweenFrame;
-        if(this.time>1)
+        this.time+=time.secondsBetweenFrame;
+        if(this.time>3)
         {
             Game.changeScene(1)
         }
