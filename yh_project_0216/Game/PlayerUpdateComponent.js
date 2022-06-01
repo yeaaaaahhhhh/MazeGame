@@ -3,6 +3,7 @@ import Input from '../engine/Input.js'
 import Constants from './Constants.js'
 import Game from "../engine/Game.js"
 import time from "../engine/time.js"
+import ShadowGameObject from "./ShadowGameObject.js";
 class PlayerUpdateComponent extends Component {
     constructor(parent) {
         super(parent)
@@ -18,7 +19,7 @@ class PlayerUpdateComponent extends Component {
         let wallObjects = Game.findByType("WallGameObject")
         //console.log(wallObjects)
         let shadowObjects = Game.findByType("ShadowGameObject")
-        let itemObject = Game.findByType("ItemGameObject")[0]
+        let itemObjects = Game.findByType("ItemGameObject")
         //console.log(px+ "////"+py)
         //console.log(Input.frameKey + "****")
         if (Input.frameKey != undefined) {
@@ -54,11 +55,14 @@ class PlayerUpdateComponent extends Component {
                 circle.x = pxNew
                 circle.y = pyNew
             }
-            if (itemObject != null) {
-                let item = itemObject.getComponent("Rectangle")
+
+
+            let orangeItem=itemObjects.find(element=>element.getComponent("RectangleDraw").fillStyle=="orange")
+            if (orangeItem != null) {
+                let item = orangeItem.getComponent("Rectangle")
                 if (item.x < circle.x + 10 && item.x + 10 > circle.x - 10 && item.y < circle.y + 10 && item.y + 10 > circle.y - 10) {
                     console.log("b")
-                    itemObject.markForDelete = true;
+                    orangeItem.markForDelete = true; 
                     Constants.aTime+=time.timePassed
                     // let tempObjects = structuredClone(shadowObjects);
                     shadowObjects.forEach(element => {
@@ -77,6 +81,20 @@ class PlayerUpdateComponent extends Component {
                 }
             }
 
+            let blueItem=itemObjects.find(element=>element.getComponent("RectangleDraw").fillStyle=="skyblue")
+            if(blueItem!=null)
+            {
+                let item = blueItem.getComponent("Rectangle")
+                if (item.x < circle.x + 10 && item.x + 10 > circle.x - 10 && item.y < circle.y + 10 && item.y + 10 > circle.y - 10) {
+                    blueItem.markForDelete=true
+                    shadowObjects.forEach(e=>e.markForDelete=true)
+                    for (let x = 105; x < 600; x = x + 50) {
+                        for (let y = 105; y < 500; y = y + 50) {
+                            Game.scene().gameObjects.push(new ShadowGameObject(x, y, 50, 50, "grey"))
+                        }
+                    }
+                }
+            }
 
             let shadows = []
             for (let shadow of shadowObjects) {
@@ -88,17 +106,15 @@ class PlayerUpdateComponent extends Component {
             let idxfound = shadows.findIndex(function (element) {
 
                 if (element.x < circle.x + 10 && element.x + 50 > circle.x - 10 && element.y < circle.y + 10 && element.y + 50 > circle.y - 10) {
-                    console.log("a")
+                    //console.log("a")
                     return true
                 }
                 return false
             })
 
 
-            //console.log(idxfound)
 
             if (idxfound > -1) {
-                console.log(idxfound)
                 shadowObjects[idxfound].markForDelete = true
             }
 

@@ -63,9 +63,14 @@ class MainScene extends Scene{
         this.gameObjects.push(new WallGameObject(100, 195, 105, 10, "white"))
 
         this.gameObjects.push(new ItemGameObject(180,280,"orange"))
+        this.gameObjects.push(new ItemGameObject(450,280,"skyblue"))
 
         this.gameObjects.push(new PlayerGameObject(225, 115, 15))
        
+        this.pushShadow()
+    }
+    pushShadow()
+    {
         for (let x = 105; x < 600; x = x + 50) {
             for (let y = 105; y < 500; y = y + 50) {
                 this.gameObjects.push(new ShadowGameObject(x, y, 50, 50, "grey"))
